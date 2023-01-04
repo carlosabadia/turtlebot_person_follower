@@ -6,7 +6,7 @@ This project is a person follower using TurtleBot and ROS. The person is detecte
 The project was tested on Ubuntu 20.04 and ROS Noetic.
 
 ## Demo:
-- Demo of the person follower in a Gazebo simulation usin TurtleBot3 Waffle Pi: 
+- Demo of the person follower in a Gazebo simulation using TurtleBot3 Waffle Pi: 
 ![alt text](images/demo.webp "Gazebo simulation")
 
 ## Installation:
