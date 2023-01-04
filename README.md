@@ -26,7 +26,7 @@ cd ..
 source devel/setup.bash
 ```
 - To run the recognition model, run the following command: ```python3 app.py```
-- To run the person follower, run the following command: ```rosrun person_follower follower.py```
+- To run the person follower, run the following command: ```rosrun turtlebot_person_follower follower.py```
 
 ## Recognition model ```app.py```:
 - A Gradio UI will start running, then click on the link provided to open the UI on your browser.
