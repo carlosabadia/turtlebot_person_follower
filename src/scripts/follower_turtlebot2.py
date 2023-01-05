@@ -20,7 +20,7 @@ class LookForPerson(smach.State):
         smach.State.__init__(self, outcomes=['found_person', 'not_found'])
 
         rospy.Subscriber("/center", center, self.center_cb, queue_size=10)
-        self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+        self.pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
         self.speed = Twist()
         self.name = "Unknown"
 
@@ -51,7 +51,7 @@ class FollowPerson(smach.State):
         self.min_zone_right = 0
         self.speed = Twist()
         rospy.Subscriber("/center", center, self.center_cb, queue_size=10)
-        self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+        self.pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
         rospy.Subscriber("/scan", LaserScan, self.laser_cb, queue_size=10)
 
     def center_cb(self, data):
@@ -60,9 +60,7 @@ class FollowPerson(smach.State):
         self.person_center_x = data.x
 
     def laser_cb(self, data):
-        self.min_zone_left = min(data.ranges[0:15])
-        self.min_zone_right = min(data.ranges[345:360])
-        self.min_total = min(self.min_zone_right, self.min_zone_left)
+        self.min_total = min(data.ranges[320:639])
         
     
     def execute(self, userdata):
@@ -94,7 +92,7 @@ class PersonClose(smach.State):
         smach.State.__init__(self, outcomes=['not_found', 'look_for_person', 'person_close'])
 
         self.name = "Unknown"
-        self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+        self.pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
         rospy.Subscriber("/scan", LaserScan, self.laser_cb, queue_size=10)
         self.speed = Twist()
         
