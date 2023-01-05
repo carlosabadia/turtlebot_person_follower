@@ -20,12 +20,11 @@ The project was tested on Ubuntu 20.04 and ROS Noetic.
 - Clone the repository: ```git clone https://github.com/carlosabadia/turtlebot_person_follower.git ``` in your catkin workspace src folder
 - Run the following commands:
 ```
-cd ~/catkin_ws/src
+cd catkin_ws/
 catkin_make
-cd ..
 source devel/setup.bash
 ```
-- To run the recognition model, run the following command: ```python3 app.py```
+- To run the recognition model, run the following command: ```python app.py```
 - To run the person follower, run the following command: ```rosrun turtlebot_person_follower follower.py```
 
 ## Recognition model ```app.py```:
