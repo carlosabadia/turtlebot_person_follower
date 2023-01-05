@@ -24,7 +24,7 @@ cd catkin_ws/
 catkin_make
 source devel/setup.bash
 ```
-- To run the recognition model, run the following command: ```python app.py```
+- To run the recognition model, run the following command: ```python3 app.py``` inside the ```src``` folder
 - To run the person follower, run the following command: ```rosrun turtlebot_person_follower follower.py```
 
 ## Recognition model ```app.py```:

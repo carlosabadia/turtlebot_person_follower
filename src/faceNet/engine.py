@@ -8,6 +8,7 @@ import rospy
 from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge
 import threading
+import roslaunch
 
 bridge = CvBridge()  # Used to convert ROS messages to OpenCV images
 
@@ -253,20 +254,6 @@ class Engine:
         self.frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
         self.check = True  # check if frame is ready to process
 
-    def run_on_main_thread(self):
-        """Run on main thread
-        """
-        rospy.init_node('turtlebot_camera', anonymous=True)  # initialize node
-        rospy.Subscriber(self.turtlebot_video_path, CompressedImage,
-                         self.turtlebot_camera)  # subscribe to topic
-        while not rospy.is_shutdown():  # loop until shutdown
-            if self.check:  # check if frame is ready to process
-                self.frame = self.custom_processing(
-                    self.frame)  # process frame
-                self.check = False  # reset check
-                if not self.display(self.frame, waitTime=1):  # display frame
-                    continue  # if frame is not displayed continue
-
     def run(self):
         """Main object function to start processing image, video or webcam input
         """
@@ -276,7 +263,15 @@ class Engine:
             self.process_image(self.image_path)
         elif self.turtlebot_video_path:
             print("Running model")
-            threading.main_thread().run = self.run_on_main_thread  # run on main thread
+            rospy.Subscriber(self.turtlebot_video_path, CompressedImage,
+                         self.turtlebot_camera)  # subscribe to topic
+            while not rospy.is_shutdown():  # loop until shutdown
+                if self.check:  # check if frame is ready to process
+                    self.frame = self.custom_processing(
+                        self.frame)  # process frame
+                    self.check = False  # reset check
+                    if not self.display(self.frame, waitTime=1):  # display frame
+                        continue  # if frame is not displayed continue  # run on main thread
 
         else:
             self.process_webcam()

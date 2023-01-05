@@ -2,6 +2,9 @@
 from faceNet.model_utils import add_image_to_dataset, run_model
 import gradio as gr
 import cv2
+import rospy
+
+rospy.init_node('turtlebot_camera', anonymous=True)  # initialize node
 
 # Create a list of strings to store the names of the people in the dataset to track
 names = []

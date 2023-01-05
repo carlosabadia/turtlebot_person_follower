@@ -4,6 +4,9 @@ from faceNet.engine import Engine
 from faceNet.faceDetection import MPFaceDetection
 from faceNet.faceNet import FaceNet
 import roslib
+import rospy
+
+rospy.init_node('turtlebot_camera', anonymous=True)  # initialize node
 
 DIR = roslib.packages.get_pkg_dir("person_follower", required=True)
 person_face_path = DIR + "/src/faces/Elon/" # Change this path to your folder path containing the cropped image of the person
@@ -17,6 +20,6 @@ if __name__ == '__main__':
         person_name="elon.png", # Change this to the name of the cropped image of the person
     )
 
-    engine = Engine(turtlebot_video_path="/camera/rgb/image_raw", show=True, custom_objects=[facenet, FPSmetric()])
+    engine = Engine(turtlebot_video_path="/camera/rgb/image_raw/compressed", show=True, custom_objects=[facenet, FPSmetric()])
 
     engine.run()

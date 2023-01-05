@@ -59,7 +59,7 @@ def run_model(name: str = "Person") -> None:
         load_model(name)
         
     # Initialize the engine with the specified parameters
-    engine = Engine(webcam_id=0, show=True, turtlebot_video_path="/camera/rgb/image_raw", custom_objects=[models[name], FPSmetric()])
+    engine = Engine(webcam_id=0, show=True, turtlebot_video_path="/camera/rgb/image_raw/compressed", custom_objects=[models[name], FPSmetric()])
     
     # Run the engine
     engine.run()
