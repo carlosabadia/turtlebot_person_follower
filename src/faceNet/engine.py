@@ -7,8 +7,7 @@ from tqdm import tqdm
 import rospy
 from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge
-import threading
-import roslaunch
+
 
 bridge = CvBridge()  # Used to convert ROS messages to OpenCV images
 
